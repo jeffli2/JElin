@@ -45,3 +45,7 @@ After seeing the datasets, we noticed some key issues that needed to be addresse
 
 Regarding the second dataset, they list a few countries that were not listed in the first dataset and vice versa. Therefore, it can be very limiting when comparing the countries. Luckily, the second dataset does not have any missing variables and every column seems to be normal and filled so the problem shouldn’t be too bad. 
 
+git add ProjectPlan.md
+git add <other-files-or-folders>
+git commit -m "Add project plan"
+
