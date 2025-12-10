@@ -5,197 +5,64 @@ Analyzing GDP, Minimum Wage, and Happiness in 2024
 - Jeff Li  
 - Elin Na 
 
-## Summary
-Many countries are commonly described as “wealthy” or “developed” because they have large gross domestic products (GDP) and relatively high wages. It is tempting to assume that people living in these countries are necessarily happier than people in poorer regions with lower incomes. However, these assumptions ignore important questions about how economic indicators relate to the lived experiences of citizens. In this project, we investigate whether richer countries with higher minimum wages are actually happier, and how economic factors compare to social and health-related indicators when explaining national happiness.
+Summary
 
-Our central research question is:
+Many people assume that wealthy countries are automatically happier because they have higher GDP and higher wages. This seems logical, but it doesn’t always match reality. Our project looks more closely at whether richer countries with higher minimum wages are actually happier, and how these economic factors compare to social and health factors like life expectancy, social support, and freedom.
 
-> **Does a country’s GDP and minimum wage determine the level of happiness for its citizens, and how do these factors compare to social and health indicators such as life expectancy, social support, and freedom?**
+To study this, we used two datasets from Kaggle. The first comes from the World Happiness Report 2024 and includes each country’s happiness score along with information such as social support, healthy life expectancy, freedom to make life choices, generosity, and perceptions of corruption. The second dataset, Countries of the World 2023, provides economic and demographic information such as GDP, minimum wage, unemployment rate, population, and tax indicators.
 
-To answer this question, we combined two independent datasets from Kaggle. The first is the **World Happiness Report 2024** dataset, which reports each country’s average “happiness ladder score” along with explanatory variables such as social support, healthy life expectancy, freedom to make life choices, generosity, and perceptions of corruption. The second is a **Countries of the World 2023** dataset, which focuses on economic and structural indicators including nominal GDP, minimum wage, unemployment rate, labor force participation, tax measures, and demographic information.
+We cleaned each dataset separately by removing missing values, fixing inconsistent country names, and converting formatted numbers like GDP and minimum wage into actual numeric values. We also removed countries with incomplete or non-usable data so that the analysis would be consistent. For example, we removed Tajikistan because it was missing important happiness variables, and we noted Afghanistan as an outlier due to its unusually low happiness score.
 
-We first profiled and cleaned each dataset separately, focusing on missing values, inconsistent country naming, and problematic records. We removed countries with substantial missing data and standardized formats (for example, converting GDP and minimum wage from formatted strings like `"$19,101,353,833"` to numeric values). We also identified and handled clear outliers, such as Afghanistan’s extremely low happiness score in the World Happiness dataset.
+After cleaning, we joined the two datasets using the country name. This gave us a combined dataset with 115 countries and 27 variables. Because our project focuses on minimum wage, we removed the 21 countries that do not have a national minimum wage law. Many of these countries use collective bargaining instead, which makes them hard to compare directly. After removing these cases, our analysis used 94 countries with complete data across happiness, minimum wage, GDP, and the main social and health indicators.
 
-After cleaning, we performed a schema alignment step and integrated the datasets by country name. This produced an integrated dataset of **115 countries and 27 variables**, combining happiness metrics with economic, demographic, and health indicators. Because our research question specifically focuses on minimum wage, we excluded the 21 integrated countries that do not have statutory minimum wage laws (many of which are high-income countries relying on collective bargaining). Our final analysis dataset therefore contains **94 countries** with complete data on happiness, minimum wage, GDP, and our selected covariates.
+We then calculated correlations and ran a linear regression model. We found that factors such as social support, healthy life expectancy, freedom to make life choices, and minimum wage have much stronger relationships with happiness than GDP does. Total GDP had only a weak correlation with happiness, while social and health measurements were much more important. Our regression model explained over 80 percent of the differences in happiness across countries, and GDP was not a significant predictor once we controlled for the other variables.
 
-On this combined dataset, we computed summary statistics, pairwise correlations, and linear regression models. We found that **social and health indicators are much more strongly associated with happiness than raw GDP levels**. In particular, social support, healthy life expectancy, freedom to make life choices, and minimum wage show robust positive correlations with happiness scores, whereas total GDP shows only a weak association. This suggests that simply being a “rich” country is not enough to guarantee high happiness; how resources are converted into social support, health, and personal freedom appears to matter more.
+Overall, our analysis suggests that being a wealthy country does not automatically make people happier. What matters more is how that wealth is used to support health, social connections, and personal freedom. By combining two different datasets, we were able to get a clearer picture of what influences national happiness beyond just GDP.
 
-Our regression model, which includes GDP, minimum wage, life expectancy, social support, and freedom, explains over 80% of the variation in national happiness scores (R² ≈ 0.81). GDP itself is not a statistically significant predictor once we control for these other factors, while social support, freedom, minimum wage, and life expectancy remain significant. These results reinforce the idea that **the quality and structure of social and health systems, as well as labor protections, are more closely tied to happiness than aggregate wealth alone**.
+Data Profile 
 
-Overall, our project demonstrates the value of integrating multiple data sources to answer a policy-relevant question. By combining a happiness survey dataset with an economic and demographic dataset, we can go beyond simple GDP rankings and highlight specific features—such as social support and life expectancy—that appear to contribute more directly to the wellbeing of citizens.
+We used two main datasets from Kaggle for this project. The first dataset is based on the World Happiness Report 2024. It includes each country’s happiness ladder score and several related variables such as social support, log GDP per capita, healthy life expectancy, freedom to make life choices, generosity, and perceptions of corruption. These values come from the Gallup World Poll and other global data sources. The dataset is aggregated at the country level, so no individual-level data is involved.
 
----
+The second dataset is Countries of the World 2023, which provides economic and demographic information from sources like the World Bank and United Nations. The variables we used from this dataset include nominal GDP, national minimum wage (reported in US dollars), life expectancy, population, unemployment rate, labor force participation, and tax indicators. This dataset is also aggregated at the country level.
 
-## Data Profile (500–1000 words)
+We joined the two datasets using standardized country names after cleaning inconsistent entries. Before the join, we removed rows that did not represent actual sovereign countries. The integrated dataset initially contained 115 countries and 27 variables, combining happiness metrics with economic and demographic indicators. However, 21 countries did not have a national minimum wage, and since minimum wage is central to our research question, we excluded those from the analysis portion of the project. The final dataset used for analysis therefore includes 94 countries.
 
-Our analysis uses two core datasets, both obtained from Kaggle:
+Our dataset represents a single point in time and does not track changes across years. Because of this, our findings are descriptive and correlational rather than causal.
 
-1. **World Happiness Report 2024 – Yearly Updated**  
-   - **Source**: Kaggle dataset derived from the official World Happiness Report 2024.  
-   - **Coverage**: Countries and territories worldwide in the most recent available year (2023/2024).  
-   - **Key fields used**:
-     - `Country name`: Official country name used as a join key.
-     - `Ladder score`: The primary happiness metric, based on the Cantril ladder where people rate their life from 0 (worst) to 10 (best).
-     - `Log GDP per capita`: Log of GDP per capita (PPP adjusted).
-     - `Social support`: Average response to whether people have relatives or friends they can count on.
-     - `Healthy life expectancy`: Expected years of healthy life at birth.
-     - `Freedom to make life choices`: Measure of perceived freedom.
-     - `Generosity`: Proxy for donation behavior.
-     - `Perceptions of corruption`: Index measuring how much corruption is perceived in government and business.
-   - **Intended use**: This dataset is designed as a cross-country comparison of happiness and its correlates. The underlying data combine survey responses from Gallup World Poll with external health and economic sources.
-   - **Ethical / legal constraints**: The dataset aggregates country-level data; no individual-level records are present. Redistribution is allowed through Kaggle under their terms of service, but credit should be given to the World Happiness Report authors.
+Data Quality 
 
-2. **Countries of the World 2023**  
-   - **Source**: Kaggle dataset that aggregates data from multiple public sources (World Bank, UN, ILO, etc.) about countries’ economic, demographic, and geographic attributes.
-   - **Key fields used**:
-     - `Country`: Country name (used to align with `Country name`).
-     - `GDP`: Nominal GDP in US dollars, stored as formatted strings (e.g., `"$19,101,353,833"`).
-     - `Minimum wage`: National minimum wage, typically hourly or daily, reported in US dollars.
-     - `Life expectancy`: Average life expectancy at birth (in years).
-     - `Population`: Total population.
-     - `Unemployment rate`, `Labor force participation`, `Tax revenue (%)`, `Total tax rate`: Labor and tax indicators.
-     - Additional fields (e.g., `Co2-Emissions`, `Physicians per thousand`, `Urban_population`) that we considered during profiling.
-   - **Intended use**: Country-level economic and social indicators for comparative analysis and visualization.
-   - **Ethical / legal constraints**: All values are aggregated, public statistics. We respect Kaggle’s terms of use and treat this dataset as secondary data; we did not modify or redistribute it outside the course context.
+Before analyzing the data, we checked both datasets for missing values, inconsistencies, and formatting issues. In the World Happiness Report dataset, almost everything was complete except for Tajikistan, which was missing important happiness fields, so we removed it. Afghanistan’s score was extremely low, but since it was valid data, we kept it while noting that it was an outlier.
 
-### Integrated Dataset
+In the Countries of the World dataset, the main issue was that 21 countries did not have a national minimum wage. Since this is an essential variable for our research question, we did not try to estimate or fill in these values. Instead, we excluded those countries from the final analysis.
 
-To support our research question, we constructed an integrated dataset by joining the two Kaggle datasets on country names. Before the join, we standardized country names where necessary (for example, handling small spelling differences and removing special characters). We also removed records that were not true sovereign countries, such as territories or regions (e.g., certain overseas territories and entities with emoji-style names).
+We also fixed formatting issues. For example, GDP and minimum wage were stored as strings with symbols like “$” and commas. We removed these characters and converted them to numeric values so they could be analyzed properly. We checked for any leftover text entries and treated blank cells as missing data.
 
-The resulting integrated dataset initially contained **115 countries** and **27 variables**, combining:
+Country names needed to be standardized because some names were written differently across the two datasets. We cleaned these so that each country would match correctly, and we removed any entries that were territories rather than full countries.
 
-- Happiness metrics (ladder score, log GDP per capita, social support, healthy life expectancy, freedom, generosity, perceptions of corruption).
-- Economic and labor metrics (nominal GDP, minimum wage, unemployment, tax measures, labor force participation).
-- Demographic and health metrics (life expectancy, population, physicians per thousand, infant and maternal mortality, urbanization).
+Overall, after cleaning, the final analysis dataset has no missing values in the variables we used for our models. All important variables are numeric and consistent across countries.
 
-However, 21 of these 115 countries do not have a statutory national minimum wage; instead, many of them rely on collective bargaining or sectoral agreements. Because minimum wage is central to our research question and is not directly comparable across those countries, we treat these cases as **structurally missing** for that variable. We removed those 21 countries for our main regression and correlation analysis, leaving **94 countries** with complete data on happiness, GDP, minimum wage, and the core health and social indicators.
+Findings 
 
-Throughout the project, we treat the integrated dataset as primarily **cross-sectional**: it reflects each country’s most recent reported values rather than time series across many years. Our interpretations are therefore correlational, not causal.
+Our findings focus on how happiness relates to economic, social, and health indicators. The happiest countries in the dataset tend to be high-income democracies with strong social systems, such as Finland, Denmark, and Iceland. Countries facing conflict or economic instability generally had much lower happiness scores. However, GDP alone did not explain these differences very well.
 
----
+The correlation results showed that social support, healthy life expectancy, freedom to make life choices, and minimum wage all had strong positive relationships with happiness. GDP, on the other hand, had a very weak correlation with happiness. This means that while money might help indirectly, the things that seem to matter most are health, support networks, and personal freedom.
 
-## Data Quality (500–1000 words)
+We also ran a multiple linear regression model. This model explained more than 80 percent of the differences in happiness across countries. In this model, social support, freedom, minimum wage, and life expectancy were all important predictors. GDP, however, was not significant after controlling for these other factors.
 
-We conducted a multi-step data quality assessment before performing any analysis. Our goals were to (1) understand missingness patterns, (2) ensure consistent representation of key variables, and (3) detect unusual or implausible values.
+In short, our results suggest that simply increasing a country’s GDP is not the most effective way to increase happiness. Instead, improving social and health systems appears to have a much stronger connection to wellbeing.
 
-### Missing Data and Record Filtering
+Future Work 
 
-For the **World Happiness Report** dataset, most variables were complete. We found one country (Tajikistan) with missing or incomplete happiness metrics, which we removed from the dataset to avoid introducing bias through imputation of the main outcome variable. We also identified Afghanistan as a statistical outlier with a very low ladder score (~1.7). Rather than removing it automatically, we kept it in the dataset but noted it as an influential observation when interpreting descriptive statistics. :contentReference[oaicite:1]{index=1}  
+There are several ways our project could be expanded. One improvement would be to use data across multiple years instead of just a single year. This would let us see how changes in GDP, minimum wage, or health systems relate to changes in happiness over time.
 
-In the **Countries of the World 2023** dataset, missingness primarily appeared in the `Minimum wage` column. Exactly 21 countries had a missing minimum wage. These correspond to countries without nationwide statutory minimum wage laws (e.g., certain Nordic countries that rely on collective bargaining), which means that the missingness is not random but reflects structural differences in labor law. Because our research question focuses on the relationship between happiness and minimum wage, we decided not to impute these values. Instead, we removed these 21 countries from the analysis dataset when studying minimum wage, while still counting them in the integrated data profile. :contentReference[oaicite:2]{index=2}  
+It would also be useful to include measures of inequality, because country averages do not show how happiness differs within a country. Some countries might have high average happiness but still have groups who are struggling.
 
-We also examined missingness in other key variables such as GDP, life expectancy, unemployment, and tax indicators. These variables were largely complete for the countries retained in our final integrated dataset. When isolated missing values occurred for non-critical variables, we either excluded those variables from the analysis or restricted certain models to complete-case subsets.
+Another extension would be to explore more detailed causal methods. Our project shows correlations, but it cannot prove cause and effect. With better data, we could look at policy changes or major economic shifts to study how they influence happiness.
 
-### Standardization and Type Cleaning
+We could also include more cultural or political variables, such as trust in government or levels of social capital, which might help explain differences between countries with similar GDP levels.
 
-Several fields in the **Countries of the World** dataset were stored as formatted strings rather than numeric types. For example:
+Finally, our workflow could be improved with more automation and clearer metadata. Creating scripts that handle the entire cleaning and merging process would make the project easier to reproduce, and adding more visualizations could help communicate results more clearly.
 
-- `GDP` values were stored as strings with currency symbols and commas (e.g., `"$19,101,353,833"`).
-- `Minimum wage` values were stored as strings with a leading `$`.
+Reproducing 
 
-We standardized these fields by removing currency symbols and thousands separators and converting them to floating-point numbers in US dollars. This allowed us to compute correlations, regressions, and summary statistics consistently across countries.
-
-We also checked for non-numeric anomalies in these columns (for example, the presence of text like “N/A” or “No data”). In the supplied CSV, all non-missing minimum wage values used a consistent `"$X.XX"` format, so conversion was straightforward. We treated blank entries as missing.
-
-### Country Name Alignment and De-duplication
-
-To join the two datasets, we needed consistent country identifiers. We inspected cases where the join failed and determined that some entries represented territories or special entities rather than sovereign states. We removed such entries from the integrated dataset. In addition, where small naming differences existed (e.g., variations in punctuation or abbreviations), we standardized them to a shared naming convention before joining.
-
-This process produced a clean integrated dataset with a one-to-one mapping between happiness records and economic records for each country included. The resulting dataset contained no duplicate countries.
-
-### Outliers and Distributions
-
-We visually inspected distributions of key variables (ladder score, GDP, minimum wage, life expectancy) using histograms and scatterplots. Observations include:
-
-- Happiness scores cluster between 3 and 7.5, with a small number of very low and very high scores.
-- GDP values are highly skewed, with a few extremely large economies. Because we used the happiness dataset’s `Log GDP per capita` for some comparisons, we partially mitigated this skewness.
-- Minimum wages vary widely: some countries have values near $0.30–$1.00 (likely daily or hourly wages in lower-income countries), whereas rich countries may report minimum wages above $10.
-- Life expectancy ranges from roughly the low 60s to the mid-80s.
-
-We did not perform aggressive outlier removal beyond the earlier record-level filtering. Instead, we relied on robust statistical summaries and clear discussion of limitations when interpreting our models.
-
-### Final Quality Assessment
-
-After cleaning, our **analysis dataset** of 94 countries contains:
-
-- No missing values for the variables used in our main models (happiness, GDP, minimum wage, life expectancy, social support, freedom).
-- Consistent numeric formats for all economic and happiness variables.
-- A well-documented set of exclusions (countries with missing happiness, missing minimum wage, or problematic country definitions).
-
-We judge the resulting dataset to be of adequate quality for exploratory analysis and linear modeling, given the limitations of cross-country observational data.
-
----
-
-## Findings (~500 words)
-
-Our analysis focuses on understanding how happiness relates to economic, health, and social indicators. We report three main sets of results: descriptive patterns, correlations, and regression models.
-
-### Descriptive Patterns
-
-At a high level, the happiest countries in our dataset tend to be high-income democracies with strong social safety nets and long life expectancy. The top ladder scores come from countries such as Finland, Denmark, Iceland, Sweden, and the Netherlands, with scores above 7.0. At the other end of the spectrum are countries experiencing conflict or severe economic challenges, which have ladder scores closer to 3.0 or below.
-
-However, some relatively wealthy countries do not rank as high as their GDP might suggest, and some middle-income countries perform better than expected on happiness. This already hints that GDP alone is not the full story.
-
-### Correlations
-
-We computed Pearson correlations between happiness (ladder score) and several key predictors across the cleaned analysis dataset. The approximate correlations are:
-
-- **Social support**: r ≈ 0.84  
-- **Healthy life expectancy**: r ≈ 0.74  
-- **Life expectancy (from the world dataset)**: r ≈ 0.71  
-- **Freedom to make life choices**: r ≈ 0.60  
-- **Minimum wage**: r ≈ 0.57  
-- **Perceptions of corruption** (higher values = less corruption): r ≈ 0.36  
-- **GDP (total nominal)**: r ≈ 0.18  
-
-These results show that **social support, health, and perceived freedom are much more strongly related to happiness than GDP**. Minimum wage also shows a moderate positive correlation, suggesting that stronger wage floors may be associated with higher life satisfaction, although this correlation is smaller than that of social and health factors.
-
-### Regression Analysis
-
-We estimated a multiple linear regression model with happiness ladder score as the dependent variable and the following predictors:
-
-- Nominal GDP  
-- Minimum wage  
-- Life expectancy  
-- Social support  
-- Freedom to make life choices  
-
-The model explains about **81% of the variance in happiness scores (R² ≈ 0.81)**, indicating a strong overall fit. In this model:
-
-- **Social support** has a large, statistically significant positive coefficient: countries where people report having reliable support networks tend to be substantially happier.
-- **Freedom to make life choices** is also strongly positive and significant, suggesting that autonomy and perceived control over one’s life strongly influence happiness.
-- **Minimum wage** has a positive and significant effect, indicating that stronger wage protections are associated with higher national happiness, controlling for other factors.
-- **Life expectancy** has a smaller but still significant positive effect.
-- **GDP** has a tiny, statistically insignificant coefficient once the above variables are included, suggesting that **GDP’s apparent relationship with happiness is largely mediated by social and health conditions**.
-
-Overall, our findings support the conclusion that **economic prosperity alone does not guarantee high happiness**. Instead, the way a society translates wealth into social support, health, freedom, and fair labor conditions appears to be more important for citizens’ wellbeing.
-
----
-
-## Future Work (500–1000 words)
-
-Our project highlights several promising directions for future research and improvements to our current workflow.
-
-First, our analysis is based on a single cross-sectional snapshot of countries. A natural extension would be to construct a **panel dataset** that follows countries across many years of the World Happiness Report and corresponding economic statistics. This would allow us to analyze how changes in minimum wage, GDP, or social policy over time relate to changes in happiness. With panel data, we could use fixed-effects or difference-in-differences models to better control for unobserved, time-invariant country characteristics.
-
-Second, our current analysis focuses on **country averages**, which may mask substantial within-country inequality. Future work could incorporate measures of income inequality (such as Gini coefficients), regional disparities, or distributions of happiness scores if micro-data become available. This would help answer questions like: do high national happiness scores hide unhappy subgroups, and how does inequality interact with minimum wage policies?
-
-Third, we only scratched the surface of **causal inference**. Because our data are observational and cross-country, we cannot claim that higher minimum wage causes higher happiness. Future research could look for quasi-experimental settings—such as major minimum wage reforms or policy changes—and study their impact on happiness in a difference-in-differences framework. Alternatively, instrumental variable approaches might be explored if appropriate instruments can be identified.
-
-Fourth, we could expand our analysis to incorporate additional **institutional and cultural variables**, such as political regime type, unionization rates, trust indices, or measures of social capital. These variables may help explain why some high-GDP countries are not as happy as others with similar income levels. Incorporating institutional data would also help us interpret the role of collective bargaining in countries without statutory minimum wages.
-
-From a **data engineering** perspective, our workflow could be improved by:
-
-- Refactoring the cleaning and integration steps from the Jupyter notebook into reusable Python modules or scripts.
-- Adding a **Snakemake** or similar workflow file that fully automates the pipeline from raw data download to final analysis and visualization.
-- Expanding our metadata and data dictionary so that future users can more easily understand each variable’s meaning, units, and origin.
-
-Finally, our current visualizations are primarily exploratory scatterplots and correlation heatmaps. Future work could focus on more advanced visual storytelling—for example, interactive dashboards showing how happiness varies with minimum wage and life expectancy across regions, or clustering analyses that group countries into “happiness profiles” based on multiple indicators. These tools would make our results more accessible to policymakers, students, and the general public.
-
-In summary, while our project provides a useful first look at how economic and social factors relate to national happiness, there is ample room to refine the data, apply more advanced methods, and broaden the scope of variables considered.
-
----
-
-## Reproducing
-
-This section describes how someone else can reproduce our results using the code and data in this repository.
+This section explains how someone else can reproduce our results. It will include steps such as cloning the repository, setting up a Python environment, downloading the data from Box, and running the analysis notebook.
