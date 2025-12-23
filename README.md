@@ -1,13 +1,17 @@
 Do Richer Countries Have Happier Citizens?
+
 Analyzing GDP, Minimum Wage, and Happiness in 2024
+
 Contributors
-Jeff Li
+Jeff Li:
+
 Data cleaning, data integration, analysis, visualization, interpretation of results
 
-Elin Na
+Elin Na:
+
 Data collection, data quality assessment, documentation, ethical and legal review, reproducibility
 
-Contribution Statement
+Contribution Statement:
 Both contributors worked collaboratively throughout the duration of the project. Responsibilities were divided to ensure that all major components of the data lifecycle were addressed, from data acquisition and cleaning to analysis, interpretation, and documentation. Individual roles are listed above to clearly demonstrate how each contributor participated in the project, in accordance with the grading guidelines.
 
 Summary
