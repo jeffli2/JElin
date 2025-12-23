@@ -1,20 +1,20 @@
-Do Richer Countries Have Happier Citizens?
+# **Do Richer Countries Have Happier Citizens?**
 
-Analyzing GDP, Minimum Wage, and Happiness in 2024
+# Analyzing GDP, Minimum Wage, and Happiness in 2024
 
-Contributors
-Jeff Li:
-
+**Contributors**  
+Jeff Li  
 Data cleaning, data integration, analysis, visualization, interpretation of results
 
-Elin Na:
-
+Elin Na  
 Data collection, data quality assessment, documentation, ethical and legal review, reproducibility
 
-Contribution Statement:
+## **Contribution Statement**
+
 Both contributors worked collaboratively throughout the duration of the project. Responsibilities were divided to ensure that all major components of the data lifecycle were addressed, from data acquisition and cleaning to analysis, interpretation, and documentation. Individual roles are listed above to clearly demonstrate how each contributor participated in the project, in accordance with the grading guidelines.
 
-Summary
+## **Summary**
+
 People often assume that countries with higher levels of wealth are happier places to live. Measures such as Gross Domestic Product (GDP) and wages are frequently used by governments and international organizations to evaluate national success and progress. Higher income levels are commonly associated with better access to resources, improved infrastructure, and higher standards of living. However, happiness is a complex concept that extends beyond economic output alone. Individuals’ wellbeing is also shaped by social relationships, health, personal freedom, and trust in institutions. As a result, higher national income does not necessarily guarantee that people feel satisfied, secure, or fulfilled in their daily lives.
 
 This project explores whether richer countries are actually happier and examines whether economic indicators such as GDP and national minimum wage explain happiness better than social and health-related factors. Our central research question is whether higher GDP and higher minimum wages are associated with higher national happiness scores, and how these economic measures compare to non-economic variables such as social support, healthy life expectancy, and freedom to make life choices. We hypothesize that while economic factors may show some relationship with happiness, social and health indicators will be stronger predictors once multiple factors are considered simultaneously.
@@ -31,7 +31,8 @@ Instead, social and health-related factors play a much larger role in explaining
 
 Overall, this project demonstrates the importance of looking beyond traditional economic measures when evaluating national success. Policymakers who focus solely on increasing GDP may overlook key drivers of happiness and wellbeing. Our analysis highlights the value of social support systems, health outcomes, and labor protections in promoting happier societies.
 
-Data Profile
+## **Data Profile**
+
 This project uses two publicly available datasets obtained from Kaggle. Both datasets report information at the country level and do not include individual-level or personally identifiable data. As a result, they are suitable for comparative analysis while posing minimal ethical or privacy risks.
 
 The World Happiness Report 2024 dataset is based on survey data collected through the Gallup World Poll. Gallup uses nationally representative samples and standardized survey methods to measure how individuals evaluate their overall quality of life. Respondents are asked to imagine a ladder with steps numbered from zero to ten, where zero represents the worst possible life and ten represents the best possible life. They are then asked to place themselves on this ladder. The average score for each country is reported as the national happiness score.
@@ -48,13 +49,19 @@ One limitation of this dataset is that minimum wage definitions vary across coun
 
 Both datasets are publicly available on Kaggle and are permitted for educational and research use under Kaggle’s terms of service.
 
-Ethics & Legal Constraints
-This project uses published datasets which are all licensed for educational and research purposes under the Kaggle website. The datasets include important details about countries and territories that were listed here. The World Happiness Report 2024 is released within the CC0 Public Domain which means that it can be used freely for anyone without any limitations or restrictions. The Countries of the World 2023 dataset is licensed and distributed under Attribution 4.0 International (CC BY 4.0). This specifically requires appropriate credit to the original data source unlike the World Happiness Report 2024. All of the citations and attributions are listed and cited in the References section under this project report. 
+**Ethics & Legal Constraints**  
+This project uses published datasets which are all licensed for educational and research purposes under the Kaggle website. The datasets include important details about countries and territories that were listed here. The World Happiness Report 2024 is released within the CC0 Public Domain which means that it can be used freely for anyone without any limitations or restrictions. The Countries of the World 2023 dataset is licensed and distributed under Attribution 4.0 International (CC BY 4.0). This specifically requires appropriate credit to the original data source unlike the World Happiness Report 2024\. All of the citations and attributions are listed and cited in the References section under this project report. 
+
 Since the analysis for this project relies entirely on aggregated national-level statistics, there is little to no privacy concerns when it comes to the respondents. The Gallup World Poll has established ethical protocols and rules when it comes to conducting survey research which requires consent and must be a voluntary participation. However, it is very important to understand that for aggregated data, it can obscure significant within-country variation. Since there are national averages, they may hide inequalities across multiple regions, demographic populations, and income groups. For example, even though a country may have a high happiness report, there are still communities within that country that face hardship. With our analysis, it does not really entirely capture the disparities and inequalities. Therefore, users should be extremely careful and mindful about generalizing findings and understand that not all generalized findings are factually correct to all people within a country. 
+
 The datasets that were used for this research project were all compiled by reputable global organizations such as The United Nations, the International Labour Organization, and the World Bank. These institutions maintain advanced data collection standards and all of their methodologies are publicly updated and published. However, there are also challenges that come along with using the datasets that we used. If there were surveys, their questions may be approached differently across different people in different countries and different cultures. For example, there may be differences in how each country measures or defines unemployment or labor force participation. With these inconsistencies, it would unintentionally introduce bias and hinder our preciseness in our research findings. While we are attempting to use standardized variables, data users need to be wary that cultural differences and how the country is run may impact the results of the data. 
+
 Additionally, another ethical consideration that is important for this project involves cleaning out countries that did not have defined minimum wages. Twenty-one countries were removed from our analysis and project because they did not have a reported minimum wage, and often relied on sector-specific agreements instead. Because we excluded the twenty-one countries, this exclusion may introduce selection bias, since countries that follow a more collective bargaining system have different rules and regulations when it comes to the topic and issue of the minimum wage system. We did not exclude them out of spite, but the decision for this was due to avoid introducing artificial relationships and providing false information for users. We need to remain transparent to gain the public's trust. However, since we made this difficult decision, our overall findings and results do not generalize all of the existing economic systems and users should interpret the results within these limitations.
+
 Lastly, even though the goal of this project is to contribute to policy discussions regarding economic development and well being, correlation does not imply causation. Although our results point to correlations between happiness and a number of social and economic variables, they do not prove that changes in one variable directly influence changes in another. Instead of viewing these findings as conclusive proof for particular interventions, policymakers should view them as descriptive insights. To use this research responsibly, one must be aware of its limitations, scope, and the situations in which its conclusions might or might not be applicable. 
-Data Quality
+
+## **Data Quality**
+
 We conducted a thorough data quality assessment before integrating and analyzing the datasets to ensure that the results of our analysis were reliable, transparent, and reproducible. Because this project combines data from two different sources, careful attention to completeness, consistency, and formatting was essential in order to avoid misleading conclusions.
 
 For the World Happiness dataset, most countries had complete information across all variables of interest, including happiness score, social support, healthy life expectancy, and freedom to make life choices. One country, Tajikistan, was missing several key happiness-related variables and could not be meaningfully included in the analysis. Because these missing values affected the dependent variable itself, Tajikistan was removed from the dataset entirely. Afghanistan reported an extremely low happiness score relative to other countries. However, this value reflects real-world social and political conditions rather than a data entry error or measurement problem. For this reason, Afghanistan was retained in the dataset and treated as a meaningful outlier rather than being removed or adjusted.
@@ -67,7 +74,7 @@ Missing or blank cells were handled consistently across both datasets. Rows with
 
 After cleaning and integration, the final dataset contains 94 countries and has no missing values in the variables used for analysis. All variables are numeric, consistently formatted, and directly comparable across countries. Although excluding countries without minimum wage data may introduce some selection bias, this decision was necessary to ensure meaningful comparisons and to maintain transparency about the limitations of the analysis.
 
-Findings
+**Findings**  
 The results of this project indicate that happiness is more closely associated with social and health-related factors than with economic output alone. While economic measures such as GDP and minimum wage are often assumed to be strong indicators of wellbeing, our analysis shows that they do not fully explain differences in happiness across countries.
 
 Correlation analysis reveals strong positive relationships between happiness and social support, healthy life expectancy, freedom to make life choices, and minimum wage. Countries with stronger social networks and better health outcomes tend to report higher happiness scores. In contrast, GDP shows only a weak correlation with happiness. This suggests that economic size alone does not capture the factors that contribute most directly to people’s life satisfaction.
@@ -82,7 +89,8 @@ These results have important implications for policy and evaluation. Governments
 
 Overall, the findings reinforce the idea that happiness is multidimensional. Economic indicators matter, but social and health-related factors are more central to how people evaluate their lives.
 
-Future Work
+## **Future Work**
+
 There are several ways this project could be expanded and improved in future work. One important extension would be to incorporate data from multiple years rather than focusing on a single snapshot in time. A longitudinal analysis would allow researchers to examine how changes in economic conditions, labor policies, and social factors affect happiness over time. By observing trends rather than single-year comparisons, future studies could better distinguish between short-term fluctuations and long-term structural relationships. This approach would also allow for stronger conclusions about causality rather than simple correlation, helping determine whether changes in policy or economic conditions actually lead to measurable changes in happiness.
 
 Future research could also include measures of inequality, such as income distribution, poverty rates, or cost of living indices. National averages may hide important disparities within countries, particularly in nations with large income gaps or regional differences. It is possible for a country to report high average happiness while certain populations experience significantly lower wellbeing. Including inequality-related variables would provide a more nuanced understanding of how economic and social conditions affect different groups and would help clarify whether economic growth benefits are shared broadly across society.
@@ -95,29 +103,36 @@ From a technical standpoint, the workflow could be further automated to improve 
 
 Overall, this project provides a strong foundation for examining the relationship between economic conditions and happiness, but there remains significant potential for deeper analysis, broader scope, and more robust causal investigation in future research.
 
+## **Reproducing**
 
-Reproducing
-Clone the repository and create a Python environment.
-Install required dependencies listed in the requirements.txt file.
-Download the raw datasets from kaggle.
-World Happiness Report - 2024
-Global Country Information Dataset
-Place the files in the project root directory.
-Run the analysis script or notebook from start to finish.
-Output files will be generated in the data and results directories as specified.
+1. Clone the repository and create a Python environment.  
+2. Install required dependencies listed in the requirements.txt file.  
+3. Download the raw datasets from kaggle.  
+   1. [World Happiness Report \- 2024](https://www.kaggle.com/datasets/jainaru/world-happiness-report-2024-yearly-updated)  
+   2. [Global Country Information Dataset](https://www.kaggle.com/datasets/nelgiriyewithana/countries-of-the-world-2023)  
+4. Place the files in the project root directory.  
+5. Run the analysis script or notebook from start to finish.  
+6. Output files will be generated in the data and results directories as specified.
 
-References
-Datasets
-Singh, A. (2024, March 31). World happiness report 2024. Kaggle. https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024 
-Elgiriyewithana, N. (2023, July 8). Global Country Information Dataset 2023. Kaggle. https://www.kaggle.com/datasets/nelgiriyewithana/countries-of-the-world-2023 
+## **References**
 
-Software & Code
-Kaggle Team. (2025, June 22). Terms of use. Kaggle. https://www.kaggle.com/terms 
+**Datasets**
+
+Singh, A. (2024, March 31). *World happiness report 2024*. Kaggle. https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024 
+
+Elgiriyewithana, N. (2023, July 8). *Global Country Information Dataset 2023*. Kaggle. https://www.kaggle.com/datasets/nelgiriyewithana/countries-of-the-world-2023 
+
+**Software & Code**
+
+Kaggle Team. (2025, June 22). *Terms of use*. Kaggle. https://www.kaggle.com/terms 
+
 Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature 585, 357–362 (2020). DOI: 10.1038/s41586-020-2649-2.
-pandas development team. (2024). pandas (v2.2.2). https://pandas.pydata.org
-Python Software Foundation. (2024). Python (v3.12) [Computer software]. https://www.python.org/
 
-Licenses
-Data is used according to the licenses provided by the original Kaggle datasets.
+pandas development team. (2024). *pandas* (v2.2.2). [https://pandas.pydata.org](https://pandas.pydata.org)
+
+Python Software Foundation. (2024). Python (v3.12) \[Computer software\]. https://www.python.org/
+
+## **Licenses**
+
+Data is used according to the licenses provided by the original Kaggle datasets.  
 All original code in this repository is released under the MIT License unless otherwise stated.
-
